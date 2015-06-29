@@ -1,12 +1,12 @@
 require 'minitest/autorun'
 require_relative '../bitmapper'
 
-image = Bitmapper.new
-image.create(300,300)
-image.paint(1,1,'X')
+# image = Bitmapper.new
+# image.create(300,300)
+# image.paint(1,1,'X')
 
 # image.reset
-puts image.width
+# puts image.width
 
 describe "Grid" do
 	it "should default to 6 by 8" do 
@@ -34,8 +34,33 @@ describe "Grid" do
 	it "should let you paint pixels" do 
 		grid = Bitmapper.new
 		grid.create(3,3)
-		grid.paint(1,1,'X')
+		grid.paint(2,2,'X')
 		grid.show.must_equal ["OOO", "OXO", "OOO"]
+	end
+	it "should not let you paint off the grid" do
+		grid = Bitmapper.new
+		grid.create(3,3)
+		grid.paint(4,4,'X')
+		grid.show.must_equal ["OOO", "OOO", "OOO"]		
+	end
+	it "should let you draw rows" do 
+		grid = Bitmapper.new
+		grid.create(3,3)
+		grid.draw_horizontal(1, 3, 1, "X")
+		grid.show.must_equal ["XXX", "OOO", "OOO"]
+	end
+	it "should let you draw columns" do 
+		grid = Bitmapper.new
+		grid.create(3,3)
+		grid.draw_vertical(1, 1, 3, "X")
+		grid.show.must_equal ["XOO", "XOO", "XOO"]
+	end
+	it "should not let you draw columns or rows off the grid" do 
+		grid = Bitmapper.new
+		grid.create(3,3)
+		grid.draw_horizontal(-1, 4, 1, "X")
+		grid.draw_vertical(1, -3, 4, "X")
+		grid.show.must_equal ["OOO", "OOO", "OOO"]		
 	end
 end
 

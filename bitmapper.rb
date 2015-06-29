@@ -30,6 +30,24 @@ class Bitmapper
 	end
 
 	def paint(x, y, colour)
-		@grid[y][x] = colour
+		if x >= 1 and x <= @width and y >= 1 and y <= @height
+			@grid[y - 1][x - 1] = colour
+		end
+	end
+
+	def draw_horizontal(start_x, end_x, y, colour)
+		if start_x >=1 and start_x <= @width and end_x >=1 and end_x <= @width and y >= 1 and y <= @height
+			(start_x..end_x).each do |x| 
+				paint(x, y, colour)
+			end
+		end
+	end
+
+	def draw_vertical(x, start_y, end_y, colour)
+		if x >= 1 and x <= @width and start_y >=1 and start_y <= @height and end_y >=1 and end_y <= @height
+			(start_y..end_y).each do |y| 
+				paint(x, y, colour)
+			end
+		end
 	end
 end
