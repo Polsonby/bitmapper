@@ -62,6 +62,12 @@ describe "Grid" do
 		grid.draw_vertical(1, -3, 4, "X")
 		grid.show.must_equal ["OOO", "OOO", "OOO"]		
 	end
+	it "should ignore the command if the row or column is drawn backwards" do
+		grid = Bitmapper.new
+		grid.create(3,3)
+		grid.draw_horizontal(3, 1, 1, "X")
+		grid.show.must_equal ["OOO", "OOO", "OOO"]
+	end
 end
 
 # describe "Person" do 
