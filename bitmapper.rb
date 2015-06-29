@@ -10,16 +10,19 @@ class Bitmapper
 	end
 
 	def create(width, height)
-		width = width.to_i || 0
-		height = height.to_i || 0
-		width = 1 if width < 1
-		height = 1 if height < 1
-		width = 250 if width > 250
-		height = 250 if height > 250
+		width = check_dimension(width)
+		height = check_dimension(height)
 
 		@width = width
 		@height = height
 		init_grid
+	end
+
+	def check_dimension(val)
+		val = val.to_i || 0
+		val = 1 if val < 1
+		val = 250 if val > 250
+		return val
 	end
 
 	def init_grid
@@ -30,13 +33,17 @@ class Bitmapper
 	end
 
 	def paint(x, y, colour)
-		if x >= 1 and x <= @width and y >= 1 and y <= @height
+		if check_bounds(x, @width) and check_bounds(y, @height)
 			@grid[y - 1][x - 1] = colour
 		end
 	end
 
+	def check_bounds(val, dimension)
+		val >= 1 and val <= dimension
+	end
+
 	def draw_horizontal(start_x, end_x, y, colour)
-		if start_x >=1 and start_x <= @width and end_x >=1 and end_x <= @width and y >= 1 and y <= @height
+		if check_bounds(start_x, @width) and check_bounds(end_x, @width) and check_bounds(y, @height)
 			(start_x..end_x).each do |x| 
 				paint(x, y, colour)
 			end
@@ -44,7 +51,7 @@ class Bitmapper
 	end
 
 	def draw_vertical(x, start_y, end_y, colour)
-		if x >= 1 and x <= @width and start_y >=1 and start_y <= @height and end_y >=1 and end_y <= @height
+		if check_bounds(x, @width) and check_bounds(start_y, @height) and check_bounds(end_y, @height)
 			(start_y..end_y).each do |y| 
 				paint(x, y, colour)
 			end
