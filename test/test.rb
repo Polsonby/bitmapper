@@ -3,7 +3,9 @@ require_relative '../bitmapper'
 
 image = Bitmapper.new
 # image.create(4,4)
-puts image.grid
+# image.reset
+puts image.show
+# puts image.grid
 
 describe "Grid" do
 	it "should default to 6 by 8" do 
