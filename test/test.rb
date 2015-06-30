@@ -43,6 +43,18 @@ describe "Grid" do
 		grid.paint(4,4,'X')
 		grid.show.must_equal ["OOO", "OOO", "OOO"]		
 	end
+	it "should let you use strings for numbers" do 
+		grid = Bitmapper.new
+		grid.create("3","3")
+		grid.paint("2","2",'X')
+		grid.show.must_equal ["OOO", "OXO", "OOO"]		
+	end
+	it "should cope if you use words for colours" do 
+		grid = Bitmapper.new
+		grid.create(3, 3)
+		grid.paint("2","2",'GREEN')
+		grid.show.must_equal ["OOO", "OGO", "OOO"]		
+	end
 	it "should let you draw rows" do 
 		grid = Bitmapper.new
 		grid.create(3,3)
