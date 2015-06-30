@@ -33,16 +33,20 @@ class Bitmapper
 	end
 
 	def paint(x, y, colour)
-		if check_bounds(x, @width) and check_bounds(y, @height)
+		x = x.to_i
+		y = y.to_i
+		colour = colour.to_s[0] if colour
+		if check_bounds(x, @width) and check_bounds(y, @height) and colour
 			@grid[y - 1][x - 1] = colour
 		end
 	end
 
 	def check_bounds(val, dimension)
+		val = val.to_i 
 		val >= 1 and val <= dimension
 	end
 
-	def draw_horizontal(start_x, end_x, y, colour)
+	def draw_horizontal(start_x = 0, end_x = 0, y = 0, colour = "O")
 		if check_bounds(start_x, @width) and check_bounds(end_x, @width) and check_bounds(y, @height)
 			(start_x..end_x).each do |x| 
 				paint(x, y, colour)
