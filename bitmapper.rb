@@ -46,7 +46,7 @@ class Bitmapper
 		val >= 1 and val <= dimension
 	end
 
-	def draw_horizontal(start_x = 0, end_x = 0, y = 0, colour = "O")
+	def draw_horizontal(start_x, end_x, y, colour)
 		if check_bounds(start_x, @width) and check_bounds(end_x, @width) and check_bounds(y, @height)
 			(start_x..end_x).each do |x| 
 				paint(x, y, colour)
